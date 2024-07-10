@@ -7,10 +7,15 @@ h1 {
   text-align: center;
 }
 .game {
-  max-width: 350px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  max-width: 275px;
   margin: auto;
 }
 .alert {
+  max-width: 350px;
+  margin: auto;
   visibility: hidden;
   padding: 10px;
   border: 2px solid magenta;
@@ -29,7 +34,6 @@ h1 {
 .letter {
   width: 50px;
   height: 50px;
-  margin: 5px;
   border: 1px solid black;
   text-align: center;
   font-size: 2em;
