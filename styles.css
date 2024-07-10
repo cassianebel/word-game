@@ -7,7 +7,20 @@ h1 {
   text-align: center;
 }
 .game {
-  
+  max-width: 350px;
+  margin: auto;
+}
+.alert {
+  display: none;
+  padding: 10px;
+  border: 2px solid magenta;
+  border-radius: 5px;
+  background-color: #ff00ff1c;
+  text-align: center;
+}
+.alert.win {
+  border-color: lawngreen;
+  background-color: #7dfc001c;
 }
 .guess {
   display: flex;

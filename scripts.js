@@ -1,3 +1,6 @@
+const message = document.querySelector('.alert');
+const forms = document.querySelectorAll('form');
+
 async function getWord() {
   const url = "https://words.dev-apis.com/word-of-the-day";
   try {
@@ -34,24 +37,30 @@ async function validateWord(guess) {
 async function handleSubmit(guess, inputs) {
   const answer = await getWord(); 
   const isValid = await validateWord(guess);
-  
+  console.log(guess)
   // check for 5 letters
   if (guess.length < 5) {
-    console.log('too short');
+    message.innerText = "Must be a five letter word."
+    message.style.display = "block"
   }
   // validate that the guess it is a word
   if (!isValid) {
-    console.log('not valid word');
+    message.innerText = "Must be a valid word.";
+    message.style.display = "block";
   }
   // disalbe the inputs
   if (isValid && guess.length === 5) {
     for (var i = 0, len = inputs.length; i < len; ++i) {
       inputs[i].disabled = true;
+      message.style.display = "none";
     }
   }
   // check for a win
   if (guess === answer) {
-    console.log('you got it!')
+    message.innerText = "You got it!";
+    message.classList.add('win');
+    message.style.display = "block";
+    document.querySelectorAll('input').disabled = true;
   }
 
   let answerArray = answer.split('');
@@ -72,7 +81,7 @@ async function handleSubmit(guess, inputs) {
   }
 }
 
-const forms = document.querySelectorAll('form');
+
 forms.forEach(form => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
