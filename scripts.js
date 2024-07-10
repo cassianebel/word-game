@@ -62,7 +62,10 @@ async function handleSubmit(guess, inputs) {
     message.style.display = "block";
     document.querySelectorAll('input').disabled = true;
   }
-
+  // gray out all letters
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].style.backgroundColor = 'lightgray';
+  }
   let answerArray = answer.split('');
   // check letters for exact match
   for (let i = 0; i < inputs.length; i++) {
@@ -77,8 +80,9 @@ async function handleSubmit(guess, inputs) {
     if (answerArray.includes(letter)) {
         inputs[i].style.backgroundColor = 'yellow';
         answerArray.splice(answerArray.indexOf(letter), 1, 'matched')
-    }
+    } 
   }
+
 }
 
 
