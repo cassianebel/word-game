@@ -11,7 +11,7 @@ h1 {
   margin: auto;
 }
 .alert {
-  display: none;
+  visibility: hidden;
   padding: 10px;
   border: 2px solid magenta;
   border-radius: 5px;

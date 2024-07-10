@@ -41,46 +41,45 @@ async function handleSubmit(guess, inputs) {
   // check for 5 letters
   if (guess.length < 5) {
     message.innerText = "Must be a five letter word."
-    message.style.display = "block"
+    message.style.visibility = "visible"
   }
   // validate that the guess it is a word
   if (!isValid) {
     message.innerText = "Must be a valid word.";
-    message.style.display = "block";
+    message.style.visibility = "visible"
   }
   // disalbe the inputs
   if (isValid && guess.length === 5) {
     for (var i = 0, len = inputs.length; i < len; ++i) {
       inputs[i].disabled = true;
       message.style.display = "none";
+      inputs[i].style.backgroundColor = 'lightgray';
     }
-  }
-  // check for a win
-  if (guess === answer) {
-    message.innerText = "You got it!";
-    message.classList.add('win');
-    message.style.display = "block";
-    document.querySelectorAll('input').disabled = true;
-  }
-  // gray out all letters
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].style.backgroundColor = 'lightgray';
-  }
-  let answerArray = answer.split('');
-  // check letters for exact match
-  for (let i = 0; i < inputs.length; i++) {
-    if (inputs[i].value.toLowerCase() === answerArray[i]) {
-        inputs[i].style.backgroundColor = 'lawngreen';
-        answerArray.splice(i, 1, 'matched')
+
+    let answerArray = answer.split('');
+    // check letters for exact match
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value.toLowerCase() === answerArray[i]) {
+          inputs[i].style.backgroundColor = 'lawngreen';
+          answerArray.splice(i, 1, 'matched')
+      }
     }
-  }
-  // check letters for partial match
-  for (let i = 0; i < inputs.length; i++) {
-    let letter = inputs[i].value.toLowerCase();
-    if (answerArray.includes(letter)) {
-        inputs[i].style.backgroundColor = 'yellow';
-        answerArray.splice(answerArray.indexOf(letter), 1, 'matched')
-    } 
+    // check letters for partial match
+    for (let i = 0; i < inputs.length; i++) {
+      let letter = inputs[i].value.toLowerCase();
+      if (answerArray.includes(letter)) {
+          inputs[i].style.backgroundColor = 'yellow';
+          answerArray.splice(answerArray.indexOf(letter), 1, 'matched')
+      } 
+    }
+
+    // check for a win
+    if (guess === answer) {
+      message.innerText = "You got it!";
+      message.classList.add('win');
+      message.style.visibility = "visible"
+      document.querySelectorAll('input').disabled = true;
+    }
   }
 
 }
