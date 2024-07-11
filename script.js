@@ -1,5 +1,9 @@
+let workingGuess = '';
+let answer;
+
 async function getWord() {
-  const url = "https://words.dev-apis.com/word-of-the-day";
+  // ?random=1 gives a new word on each load, remove to keep the same word for the day
+  const url = "https://words.dev-apis.com/word-of-the-day?random=1"; 
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -35,7 +39,11 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
-let workingGuess = '';
+async function init() {
+  answer = await getWord(); 
+}
+
+init();
 
 document.addEventListener('keydown', async (event) => {
   const spaces = document.querySelectorAll('.letter:not(.disabled)');
@@ -48,20 +56,22 @@ document.addEventListener('keydown', async (event) => {
         // add last letter to the end of guess
         workingGuess += event.key;
       } else {
-        // replace the last letter once they hit 5 letters
+        // if another letter is typed after 5 replace the last letter
         workingGuess = workingGuess.substring(0, workingGuess.length - 1) + event.key;
       }
       spaces[workingGuess.length - 1].innerText = event.key;
 
     // if a backspace is typed - delete the last letter
     } else if (event.key === "Backspace"){
+      // remove it from the DOM
       spaces[workingGuess.length - 1].innerText = '';
+      // remove it from the workingGuess string
       workingGuess = workingGuess.substring(0, workingGuess.length - 1);
 
-    // if enter is typed and they haven't used all their guesses - check all the things
+    // if enter is typed (and they haven't used all their guesses) - check all the things
     } else if (event.key === "Enter") {
 
-      // check for 5 letters and create the guess array
+      // check for 5 letters 
       if (workingGuess.length < 5) {
         console.log('must be 5 letter word');
       }
@@ -72,7 +82,6 @@ document.addEventListener('keydown', async (event) => {
         console.log('must be a valid word');
       }
 
-      const answer = await getWord(); 
       // create answer array to track the letter matches
       let answerArray = answer.split('');
 
@@ -92,6 +101,8 @@ document.addEventListener('keydown', async (event) => {
           if (answerArray.includes(spaces[i].innerText)) {
             spaces[i].classList.add('partial');
             answerArray.splice(answerArray.indexOf(spaces[i].innerText), 1, 'partial');
+          } else {
+            spaces[i].classList.add('nope');
           }
         }
 
