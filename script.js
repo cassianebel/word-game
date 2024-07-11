@@ -1,3 +1,4 @@
+const message = document.querySelector('.message');
 let workingGuess = '';
 let answer;
 
@@ -73,13 +74,17 @@ document.addEventListener('keydown', async (event) => {
 
       // check for 5 letters 
       if (workingGuess.length < 5) {
-        console.log('must be 5 letter word');
+        message.classList.remove('hide');
+        message.classList.add('alert');
+        message.innerText = "Must be a 5 letter word."
       }
 
       // check if the guess is a valid word
       const isValid = await validateWord(workingGuess);
       if (!isValid) {
-        console.log('must be a valid word');
+        message.classList.remove('hide');
+        message.classList.add('alert');
+        message.innerText = "Must be a valid word."
       }
 
       // create answer array to track the letter matches
@@ -87,7 +92,8 @@ document.addEventListener('keydown', async (event) => {
 
       // if the guess is valid, check for matching letters
       if (workingGuess.length === 5 && isValid) {
-
+        // hide the message alerts
+        message.classList.add('hide');
         // check for exact matches
         for (let i = 0; i < answerArray.length; i++) {
           if (workingGuess[i] === answerArray[i]) {
@@ -102,13 +108,15 @@ document.addEventListener('keydown', async (event) => {
             spaces[i].classList.add('partial');
             answerArray.splice(answerArray.indexOf(spaces[i].innerText), 1, 'partial');
           } else {
-            spaces[i].classList.add('nope');
+            // spaces[i].classList.add('nope');
           }
         }
 
         // check for a win
         if (workingGuess === answer) {
-          console.log("You got it!");
+          message.classList.remove('hide', 'alert');
+          message.classList.add('win');
+          message.innerText = "Impressive!"
         }
 
         // disable the 5 letters for this guess (removes them from spaces list)
