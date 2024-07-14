@@ -10,11 +10,11 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 5px;
-  max-width: 275px;
+  max-width: 335px;
   margin: auto;
 }
 .message {
-  max-width: 350px;
+  max-width: 335px;
   margin: 20px auto;
   padding: 10px;
   border-radius: 5px;
@@ -33,21 +33,43 @@ h1 {
   justify-content: center;
 }
 .letter {
-  width: 50px;
+  width: 60px;
   height: 50px;
+  padding-top: 10px;
   border: 1px solid black;
   text-align: center;
   font-size: 2em;
+  text-transform: uppercase;
 }
-.disabled {
+letter.disabled {
   background-color: lightgray;
-}
-div.letter.match, .match.disabled {
-  background-color: palegreen;
 }
 div.letter.partial, .partial.disabled {
   background-color: yellow;
 }
+div.letter.match, .match.disabled {
+  background-color: palegreen;
+}
+.keyboard {
+  margin-top: 20px;
+}
+.keyboard .row {
+  display: flex;
+  justify-content: center;
+}
+.key {
+  margin: 5px;
+}
+.key.used {
+  background-color: gray;
+}
+.key.partial {
+  background-color: yellow;
+}
+.key.matched, .matched.partial, .matched.used {
+  background-color: palegreen;
+}
+
 .hide {
   visibility: hidden;
 }
