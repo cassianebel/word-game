@@ -1,7 +1,21 @@
-body {
+:root {
+  --match: #007400;
+  --partial: #978d01;
+  --used: #252527;
+  --white: #f7f7f7;
+}
+html, body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: var(--white);
+  background-color: #111;
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 h1 { 
   text-align: center;
@@ -19,14 +33,19 @@ h1 {
   padding: 10px;
   border-radius: 5px;
   text-align: center;
+  font-size: 1.2em;
 }
 .message.alert {
   border: 2px solid magenta;
-  background-color: #ff00ff1c;
+  background-color: #320032;
 }
 .message.win {
-  border: 2px solid lawngreen;
-  background-color: #7dfc001c;
+  border: 2px solid var(--match);
+  background-color: var(--match);
+}
+.message.lose {
+  border: 2px solid var(--partial);
+  background-color: var(--partial);
 }
 .guess {
   display: flex;
@@ -36,38 +55,51 @@ h1 {
   width: 60px;
   height: 50px;
   padding-top: 10px;
-  border: 1px solid black;
+  border: 1px solid #555;
   text-align: center;
   font-size: 2em;
   text-transform: uppercase;
 }
-letter.disabled {
-  background-color: lightgray;
+.letter.disabled {
+  background-color: var(--used);
 }
 div.letter.partial, .partial.disabled {
-  background-color: yellow;
+  background-color: var(--partial);
 }
 div.letter.match, .match.disabled {
-  background-color: palegreen;
+  background-color: var(--match);
 }
 .keyboard {
-  margin-top: 20px;
+  margin: 20px auto;
 }
 .keyboard .row {
   display: flex;
   justify-content: center;
 }
 .key {
+  width: 30px;
+  height: 45px;
   margin: 5px;
+  border-radius: 4px;
+  color: var(--white);
+  background-color: #74717e;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+#Enter, #Backspace {
+  width: fit-content;
+  font-size: .7rem;
 }
 .key.used {
-  background-color: gray;
+  background-color: var(--used);
 }
 .key.partial {
-  background-color: yellow;
+  background-color: var(--partial);
 }
 .key.matched, .matched.partial, .matched.used {
-  background-color: palegreen;
+  background-color: var(--match);
 }
 
 .hide {

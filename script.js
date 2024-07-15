@@ -64,14 +64,14 @@ async function handleKeyPress(key) {
       spaces[workingGuess.length - 1].innerText = key;
 
     // if a backspace is typed - delete the last letter
-    } else if (key === "Backspace"){
+    } else if (key === "Backspace" || key === "DELETE"){
       // remove it from the DOM
       spaces[workingGuess.length - 1].innerText = '';
       // remove it from the workingGuess string
       workingGuess = workingGuess.substring(0, workingGuess.length - 1);
 
     // if enter is typed (and they haven't used all their guesses) - check all the things
-    } else if (key === "Enter") {
+    } else if (key === "Enter" || key === "ENTER") {
 
       // check for 5 letters 
       if (workingGuess.length < 5) {
@@ -123,13 +123,22 @@ async function handleKeyPress(key) {
           message.innerText = "Impressive!"
         }
 
+        // reset the guess
+        workingGuess = '';
+
         // disable the 5 letters for this guess (removes them from spaces list)
         for (let i = 0; i < 5; i++) {
           spaces[i].classList.add('disabled');
         }
 
-        // reset the guess
-        workingGuess = '';
+        const spacesAfter = document.querySelectorAll('.letter:not(.disabled)');
+
+        if(spacesAfter.length === 0) {
+          message.classList.remove('hide', 'alert');
+          message.classList.add('lose');
+          message.innerText = `The word was ${answer.toUpperCase()}`;
+        }
+        
       }
 
     // if anything else is typed ignore it
