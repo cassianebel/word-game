@@ -102,15 +102,17 @@ async function handleKeyPress(key) {
             spaces[i].classList.add('match');
             answerArray.splice(i, 1, 'matched');
             document.getElementById(workingGuess[i].toUpperCase()).classList.add('matched');
+            console.log(1, answerArray);
           }
         }
 
         // check for partial matches
         for (let i = 0; i < answerArray.length; i++) {
-          if (answerArray.includes(spaces[i].innerText.toUpperCase())) {
+          if (answerArray.includes(spaces[i].innerText.toUpperCase()) && answerArray[i] !== 'matched') {
             spaces[i].classList.add('partial');
-            answerArray.splice(answerArray.indexOf(spaces[i].innerText), 1, 'partial');
+            answerArray.splice(answerArray.indexOf(spaces[i].innerText.toUpperCase()), 1, 'partial');
             document.getElementById(workingGuess[i].toUpperCase()).classList.add('partial');
+            console.log(2, answerArray);
           } else {
             document.getElementById(workingGuess[i].toUpperCase()).classList.add('used');
           }
