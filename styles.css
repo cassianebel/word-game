@@ -79,7 +79,7 @@ div.letter.match, .match.disabled {
 .key {
   width: 30px;
   height: 45px;
-  margin: 5px;
+  margin: 4px;
   border-radius: 4px;
   color: var(--white);
   background-color: #74717e;
@@ -87,6 +87,7 @@ div.letter.match, .match.disabled {
   font-size: 1.1rem;
   font-weight: 600;
   text-transform: uppercase;
+  text-align: center;
 }
 #Enter, #Backspace {
   width: fit-content;
