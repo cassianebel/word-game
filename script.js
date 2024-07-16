@@ -133,7 +133,8 @@ async function handleKeyPress(key) {
 
         const spacesAfter = document.querySelectorAll('.letter:not(.disabled)');
 
-        if(spacesAfter.length === 0) {
+        // check for a loss
+        if(spacesAfter.length === 0 && workingGuess.toUpperCase() === answer.toUpperCase()) {
           message.classList.remove('hide', 'alert');
           message.classList.add('lose');
           message.innerText = `The word was ${answer.toUpperCase()}`;
