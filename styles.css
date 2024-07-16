@@ -85,6 +85,7 @@ div.letter.match, .match.disabled {
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
+  padding: 0 3px;
 }
 #Enter, #Backspace {
   width: fit-content;
