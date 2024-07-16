@@ -123,9 +123,6 @@ async function handleKeyPress(key) {
           message.innerText = "Impressive!"
         }
 
-        // reset the guess
-        workingGuess = '';
-
         // disable the 5 letters for this guess (removes them from spaces list)
         for (let i = 0; i < 5; i++) {
           spaces[i].classList.add('disabled');
@@ -134,11 +131,14 @@ async function handleKeyPress(key) {
         const spacesAfter = document.querySelectorAll('.letter:not(.disabled)');
 
         // check for a loss
-        if(spacesAfter.length === 0 && workingGuess.toUpperCase() === answer.toUpperCase()) {
+        if(spacesAfter.length === 0 && workingGuess.toUpperCase() !== answer.toUpperCase()) {
           message.classList.remove('hide', 'alert');
           message.classList.add('lose');
           message.innerText = `The word was ${answer.toUpperCase()}`;
         }
+
+        // reset the guess
+        workingGuess = '';
         
       }
 

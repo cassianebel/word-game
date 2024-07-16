@@ -29,22 +29,19 @@ h1 {
 }
 .message {
   max-width: 335px;
-  margin: 20px auto;
+  margin: 0 auto;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   font-size: 1.2em;
 }
 .message.alert {
-  border: 2px solid magenta;
-  background-color: #320032;
+  background-color: darkmagenta;
 }
 .message.win {
-  border: 2px solid var(--match);
   background-color: var(--match);
 }
 .message.lose {
-  border: 2px solid var(--partial);
   background-color: var(--partial);
 }
 .guess {
