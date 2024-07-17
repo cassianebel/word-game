@@ -19,6 +19,10 @@ async function getWord() {
   }
 }
 
+async function init() {
+  answer = await getWord(); 
+}
+
 async function validateWord(guess) {
   const url = "https://words.dev-apis.com/validate-word";
   try {
@@ -41,11 +45,11 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
-async function init() {
-  answer = await getWord(); 
+function displayMessage(text, style) {
+  message.classList.remove('hide', 'alert');
+  message.classList.add(style);
+  message.innerText = text;
 }
-
-init();
 
 async function handleKeyPress(key) {
   const spaces = document.querySelectorAll('.letter:not(.disabled)');
@@ -75,17 +79,15 @@ async function handleKeyPress(key) {
 
       // check for 5 letters 
       if (workingGuess.length < 5) {
-        message.classList.remove('hide');
-        message.classList.add('alert');
-        message.innerText = "Must be a 5 letter word."
+        displayMessage("Must be a 5 letter word.", 'alert');
+        return;
       }
 
       // check if the guess is a valid word
       const isValid = await validateWord(workingGuess);
       if (!isValid) {
-        message.classList.remove('hide');
-        message.classList.add('alert');
-        message.innerText = "Must be a valid word."
+        displayMessage("Must be a valid word.", 'alert');
+        return;
       }
 
       // create answer array to track the letter matches
@@ -120,9 +122,7 @@ async function handleKeyPress(key) {
 
         // check for a win
         if (workingGuess.toUpperCase() === answer.toUpperCase()) {
-          message.classList.remove('hide', 'alert');
-          message.classList.add('win');
-          message.innerText = "Impressive!"
+          displayMessage("Impressive!", 'win');
         }
 
         // disable the 5 letters for this guess (removes them from spaces list)
@@ -134,9 +134,7 @@ async function handleKeyPress(key) {
 
         // check for a loss
         if(spacesAfter.length === 0 && workingGuess.toUpperCase() !== answer.toUpperCase()) {
-          message.classList.remove('hide', 'alert');
-          message.classList.add('lose');
-          message.innerText = `The word was ${answer.toUpperCase()}`;
+          displayMessage(`The word was ${answer.toUpperCase()}`, 'lose');
         }
 
         // reset the guess
@@ -163,3 +161,5 @@ keys.forEach(key => {
   })
 });
 
+
+init();
