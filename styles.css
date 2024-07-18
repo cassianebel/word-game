@@ -104,3 +104,41 @@ div.letter.match, .match.disabled {
 .hide {
   visibility: hidden;
 }
+
+/* ANIMATION */
+.scale-up-down {
+	-webkit-animation: scale-up-down 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	        animation: scale-up-down 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+
+@-webkit-keyframes scale-up-down{
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-down {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+
+

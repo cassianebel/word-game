@@ -65,7 +65,12 @@ async function handleKeyPress(key) {
         // if another letter is typed after 5 replace the last letter
         workingGuess = workingGuess.substring(0, workingGuess.length - 1) + key;
       }
+      // add the letter to the DOM with animation
+      spaces[workingGuess.length - 1].classList.add('scale-up-down');
       spaces[workingGuess.length - 1].innerText = key;
+      setTimeout(() => {
+        spaces[workingGuess.length - 1].classList.remove('scale-up-down');
+      }, 200);
 
     // if a backspace is typed - delete the last letter
     } else if (key === "Backspace" || key === "DELETE"){
